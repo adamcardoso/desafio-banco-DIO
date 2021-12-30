@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Conta {
@@ -7,8 +8,6 @@ public class Conta {
 
     private static final int AGENCIA_PADRAO = 1;
     //private static int SEQUENCIAL = 1;
-    private final int min = 1000;
-    private final int max = 9000;
 
     protected int agencia;
     protected int numero;
@@ -17,28 +16,45 @@ public class Conta {
 
     public Conta(Cliente cliente) {
         this.agencia = Conta.AGENCIA_PADRAO;
-        this.numero = random.nextInt((max - min) + max);
+        this.numero = 1 + random.nextInt(9999);
         this.cliente = cliente;
     }
 
     public void sacar(double valor) {
-        saldo -= valor;
+        if (saldo >= valor){
+            saldo -= valor;
+            System.out.print(String.format("Foram sacados R$ %.2f\n",valor));
+        }else {
+            System.out.println("Saldo insuficiente! Faça um depósito!\n");
+        }
     }
 
     public void depositar(double valor) {
         saldo += valor;
+        System.out.print(String.format("Foram depositados R$ %.2f\n",valor));
     }
 
     public void transferir(double valor, Conta contaDestino) {
-        this.sacar(valor);
-        contaDestino.depositar(valor);
+        if (saldo >= valor){
+            this.sacar(valor);
+            contaDestino.depositar(valor);
+        }else {
+            System.out.println("Impossível realizar transferência, saldo insuficiente!\n");
+        }
     }
 
     public void imprimirExtrato() {
-        System.out.println(String.format("Titular: %s", this.cliente.getNome()));
-        System.out.println(String.format("Agencia: %d", this.agencia));
-        System.out.println(String.format("Numero: %d", this.numero));
-        System.out.println(String.format("Saldo: R$ %.2f", this.saldo));
+        if (Objects.isNull(this.cliente.getNome())){
+            System.out.println("Titular: Nome inválido!");
+            System.out.println("Agencia: Agência inválida!");
+            System.out.println("Numero: Número de conta inválido!");
+            System.out.println(String.format("Saldo: R$ %.2f", this.saldo));
+        }else {
+            System.out.println(String.format("Titular: %s", this.cliente.getNome()));
+            System.out.println(String.format("Agencia: %d", this.agencia));
+            System.out.println(String.format("Numero: %d", this.numero));
+            System.out.println(String.format("Saldo: R$ %.2f", this.saldo));
+        }
     }
 
     public int getAgencia() {

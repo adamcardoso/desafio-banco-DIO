@@ -10,7 +10,7 @@ public class Menu {
     Conta poupanca = new ContaPoupanca(cliente);
 
     public void menu(){
-        double valor = 0.0;
+        double valor;
         String titular;
 
         System.out.println(" ");
@@ -26,20 +26,6 @@ public class Menu {
         System.out.print("Opção desejada: ");
         int op = input.nextInt();
 
-        /*Cliente venilton = new Cliente();
-        venilton.setNome("Venilton");
-
-        Conta cc = new ContaCorrente(venilton);
-        Conta poupanca = new ContaPoupanca(venilton);
-
-        cc.depositar(100);
-        cc.transferir(150, poupanca);
-
-        cc.imprimirExtrato();
-        poupanca.imprimirExtrato();*/
-
-
-
         do {
             switch (op){
                 case 1:
@@ -49,7 +35,6 @@ public class Menu {
                     System.out.print("R$ ");
                     valor = input.nextDouble();
                     cc.depositar(valor);
-                    System.out.print(String.format("Foram depositados R$ %.2f",valor));
                     menu();
                     break;
                 case 2:
@@ -57,7 +42,6 @@ public class Menu {
                     System.out.print("R$ ");
                     valor = input.nextDouble();
                     cc.sacar(valor);
-                    System.out.print(String.format("Foram sacados R$ %.2f",valor));
                     menu();
                     break;
                 case 3:
@@ -65,7 +49,6 @@ public class Menu {
                     System.out.print("R$ ");
                     valor = input.nextDouble();
                     cc.transferir(valor, poupanca);
-                    System.out.print(String.format("Foram transferidos R$ %.2f",valor));
                     menu();
                     break;
                 case 4:
