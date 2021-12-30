@@ -71,6 +71,7 @@ public class Menu {
                 case 4:
                     cc.imprimirExtrato();
                     poupanca.imprimirExtrato();
+                    menu();
                     break;
                 case 0:
                     System.out.print("Você está saindo do menu...");
