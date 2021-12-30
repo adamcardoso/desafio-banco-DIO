@@ -1,8 +1,14 @@
 package entities;
 
+import java.util.Random;
+
 public class Conta {
+    Random random = new Random();
+
     private static final int AGENCIA_PADRAO = 1;
-    private static int SEQUENCIAL = 1;
+    //private static int SEQUENCIAL = 1;
+    private final int min = 1000;
+    private final int max = 9000;
 
     protected int agencia;
     protected int numero;
@@ -11,7 +17,7 @@ public class Conta {
 
     public Conta(Cliente cliente) {
         this.agencia = Conta.AGENCIA_PADRAO;
-        this.numero = SEQUENCIAL++;
+        this.numero = random.nextInt((max - min) + max);
         this.cliente = cliente;
     }
 
