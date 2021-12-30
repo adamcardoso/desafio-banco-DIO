@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -30,11 +31,17 @@ public class Menu {
             switch (op){
                 case 1:
                     System.out.print("Qual o nome do titular? ");
-                    cliente.setNome(titular = input.next());
-                    System.out.print("Quanto você deseja depositar? ");
-                    System.out.print("R$ ");
-                    valor = input.nextDouble();
-                    cc.depositar(valor);
+                    cliente.setNome(titular = input.next().toUpperCase());
+                    try{
+                        if(cliente.getNome().substring(0, 5).matches("[A-Z]*")) {
+                            System.out.print("Quanto você deseja depositar? ");
+                            System.out.print("R$ ");
+                            valor = input.nextDouble();
+                            cc.depositar(valor);
+                        }
+                    }catch (StringIndexOutOfBoundsException e){
+                        System.out.println("Nome inválido! Digite um nome válido!");
+                    }
                     menu();
                     break;
                 case 2:
