@@ -1,8 +1,6 @@
 package entities;
 
-import repository.ContaRepository;
-
-public class Conta implements ContaRepository {
+public class Conta {
     private static final int AGENCIA_PADRAO = 1;
     private static int SEQUENCIAL = 1;
 
@@ -17,25 +15,24 @@ public class Conta implements ContaRepository {
         this.cliente = cliente;
     }
 
-    @Override
     public void sacar(double valor) {
         saldo -= valor;
     }
 
-    @Override
     public void depositar(double valor) {
         saldo += valor;
     }
 
-    @Override
-    public void transferir(double valor, ContaRepository contaDestino) {
+    public void transferir(double valor, Conta contaDestino) {
         this.sacar(valor);
         contaDestino.depositar(valor);
     }
 
-    @Override
     public void imprimirExtrato() {
-        imprimirInfosComuns();
+        System.out.println(String.format("Titular: %s", this.cliente.getNome()));
+        System.out.println(String.format("Agencia: %d", this.agencia));
+        System.out.println(String.format("Numero: %d", this.numero));
+        System.out.println(String.format("Saldo: R$ %.2f", this.saldo));
     }
 
     public int getAgencia() {
@@ -48,12 +45,5 @@ public class Conta implements ContaRepository {
 
     public double getSaldo() {
         return saldo;
-    }
-
-    protected void imprimirInfosComuns() {
-        System.out.println(String.format("Titular: %s", this.cliente.getNome()));
-        System.out.println(String.format("Agencia: %d", this.agencia));
-        System.out.println(String.format("Numero: %d", this.numero));
-        System.out.println(String.format("Saldo: %.2f", this.saldo));
     }
 }

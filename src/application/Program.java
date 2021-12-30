@@ -1,22 +1,11 @@
 package application;
 
-import entities.Cliente;
-import entities.Conta;
-import entities.ContaCorrente;
-import entities.ContaPoupanca;
+import entities.*;
 
 public class Program {
     public static void main(String[] args) {
-        Cliente venilton = new Cliente();
-        venilton.setNome("Venilton");
+        Menu chamaMenu = new Menu();
 
-        Conta cc = new ContaCorrente(venilton);
-        Conta poupanca = new ContaPoupanca(venilton);
-
-        cc.depositar(100);
-        cc.transferir(100, poupanca);
-
-        cc.imprimirExtrato();
-        poupanca.imprimirExtrato();
+        chamaMenu.menu();
     }
 }
