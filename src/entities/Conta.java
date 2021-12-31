@@ -3,7 +3,7 @@ package entities;
 import java.util.Objects;
 import java.util.Random;
 
-public class Conta {
+public abstract class Conta {
     Random random = new Random();
 
     private static final int AGENCIA_PADRAO = 1;
